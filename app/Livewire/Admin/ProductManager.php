@@ -74,6 +74,7 @@ class ProductManager extends Component
         $this->editingId = $product->id;
         $this->name = $product->name;
         $this->slug = $product->slug;
+        $this->sku = $product->sku;
         $this->description = $product->description;
         $this->price = $product->price;
         $this->stock = $product->stock;

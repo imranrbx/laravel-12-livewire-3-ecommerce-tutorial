@@ -4,9 +4,11 @@ namespace App\Livewire\Customers;
 
 use App\Models\Wishlist as WishlistModel;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('components.layouts.store')]
+#[Title("Wish list")]
 class Wishlists extends Component
 {
     public $items = [];

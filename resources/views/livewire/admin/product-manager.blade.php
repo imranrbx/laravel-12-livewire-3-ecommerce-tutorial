@@ -20,7 +20,7 @@
                     <tr class="border-b hover:bg-gray-50">
                         <td class="px-6 py-3">
                             @if($p->images->first())
-                                <img src="{{ asset('storage/' . $p->images->first()->image_path) }}"
+                                <img src="{{ asset($p->images->first()->image_path) }}"
                                     class="w-16 h-12 object-cover rounded" />
                             @else
                                 <div class="w-16 h-12 bg-gray-100 flex items-center justify-center">—</div>
@@ -107,11 +107,7 @@
                     </div>
 
                     <div>
-                        <flux:input label="Description">
-                            <textarea wire:model.defer="description" class="w-full mt-2 p-2 border rounded"
-                                rows="6"></textarea>
-                        </flux:input>
-
+                        <flux:textarea wire:model.defer="description" />
                         <div class="mt-3">
                             <label class="block text-sm font-medium text-gray-700">Upload Images</label>
                             <input type="file" wire:model="images" multiple class="mt-2" />

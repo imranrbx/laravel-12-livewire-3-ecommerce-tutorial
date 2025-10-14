@@ -2,6 +2,7 @@
 
 use App\Livewire\Admin\CategoryManager;
 use App\Livewire\Admin\ProductManager;
+use App\Livewire\FetchProducts;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -24,6 +25,8 @@ use App\Livewire\Customers\Reviews;
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
+Route::get('/fetch-products', FetchProducts::class)->name('products.fetch');
+
 Route::middleware(['web'])->group(function () {
 
     Route::get('/products', ProductList::class)->name('store.products');

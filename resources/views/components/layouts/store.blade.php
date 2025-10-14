@@ -24,9 +24,13 @@
                         <a href="{{ route('admin.dashboard') }}"
                             class="text-gray-700 hover:text-indigo-600 font-medium transition">Admin</a>
                     @endif
+                     @if (auth()->user()->role === 'customer')
+                        <a href="{{ route('customer.dashboard') }}"
+                            class="text-gray-700 hover:text-indigo-600 font-medium transition">Dashboard</a>
+                    @endif
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="text-red-500 hover:text-red-700 font-medium transition">
+                        <button type="submit" class="text-red-500 hover:text-red-700 font-medium transition hover:cursor-pointer">
                             Logout
                         </button>
                     </form>

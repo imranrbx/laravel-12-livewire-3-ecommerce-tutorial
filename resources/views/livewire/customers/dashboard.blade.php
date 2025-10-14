@@ -34,7 +34,7 @@
                             <div class="text-sm text-gray-700">Order #{{ $order->id }}</div>
                             <div class="text-xs text-gray-500">Placed: {{ $order->created_at->format('Y-m-d') }}</div>
                         </div>
-                        <a href="{{ route('customer.orders.show', $order->id) }}" class="text-indigo-600 text-sm">View</a>
+                        <a href="{{ route('customer.orders.detail', $order->id) }}" class="text-indigo-600 text-sm">View</a>
                     </li>
                 @endforeach
             </ul>
