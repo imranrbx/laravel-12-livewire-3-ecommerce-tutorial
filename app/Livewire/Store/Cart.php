@@ -2,8 +2,11 @@
 
 namespace App\Livewire\Store;
 
+use Livewire\Attributes\{Layout, Title};
 use Livewire\Component;
 
+#[Layout('components.layouts.store')]
+#[Title('Cart Page')]
 class Cart extends Component
 {
     public $cart = [];
@@ -24,6 +27,6 @@ class Cart extends Component
 
     public function render()
     {
-        return view('livewire.store.cart')->layout('components.layouts.store', ['title' => 'Your Cart']);
+        return view('livewire.store.cart');
     }
 }

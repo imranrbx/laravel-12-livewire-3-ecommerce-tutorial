@@ -50,4 +50,16 @@ class Product extends Model
 
        return $this->images->first()->image_path;
     }
+     public function wishlists(): HasMany
+    {
+        return $this->hasMany(Wishlist::class);
+    }
+
+    public function isWishlisted(): bool
+    {
+        return $this->wishlists()
+            ->where('user_id', auth()->id())
+            ->exists();
+    }
+    
 }

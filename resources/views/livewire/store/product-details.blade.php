@@ -19,4 +19,5 @@
             </div>
         @endif
     </div>
+    @livewire('customers.reviews' , ['productId' => $product->id])
 </div>

@@ -18,32 +18,78 @@ class Reviews extends Component
     #[Validate('nullable|string|max:2000')]
     public string $comment = '';
 
-    public function mount($id = null): void
+    #[validate('required')]
+    public int $productId;
+
+    public $showReviewForm = false;
+
+    public $hasUserReview = false;
+
+    public function mount($productId)
     {
-        if ($id) {
-            $this->review = Review::where('user_id', auth()->id())->findOrFail($id);
-            $this->rating = $this->review->rating;
-            $this->comment = $this->review->comment;
+        $this->productId = $productId;
+        $this->checkUserReview();
+    }
+
+    public function checkUserReview()
+    {
+        if (auth()->check()) {
+            $this->hasUserReview = Review::where('product_id', $this->productId)
+                ->where('user_id', auth()->id())
+                ->exists();
         }
+    }
+
+    public function showReviewForm()
+    {
+        $this->showReviewForm = true;
+    }
+
+    public function editReview($reviewId)
+    {
+        $this->review = Review::findOrFail($reviewId);
+        $this->rating = $this->review->rating;
+        $this->comment = $this->review->comment;
+        $this->showReviewForm = true;
+    }
+
+    public function cancelEdit()
+    {
+        $this->reset(['review', 'rating', 'comment']);
+        $this->showReviewForm = false;
     }
 
     public function save(): void
     {
-        $data = $this->validated();
 
+        $this->validate();
         if ($this->review) {
-            $this->review->update($data);
-            session()->flash('success', 'Review updated');
+            $this->review->update([
+                'rating' => $this->rating,
+                'comment' => $this->comment,
+            ]);
         } else {
-            Review::create(array_merge($data, ['user_id' => auth()->id()]));
-            session()->flash('success', 'Review created');
+            Review::create([
+                'user_id' => auth()->id(),
+                'product_id' => $this->productId,
+                'rating' => $this->rating,
+                'comment' => $this->comment,
+            ]);
         }
 
-        $this->redirect(route('customer.dashboard'));
+        $this->reset(['review', 'rating', 'comment']);
+        $this->showReviewForm = false;
+        $this->checkUserReview();
+        session()->flash('message', 'Review saved successfully!');
     }
 
     public function render()
     {
-        return view('livewire.customers.reviews');
+        $productReviews = Review::with('user')
+            ->where('product_id', $this->productId)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('livewire.customers.reviews', compact('productReviews'));
     }
 }

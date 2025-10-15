@@ -2,8 +2,11 @@
 
 namespace App\Livewire\Store;
 
+use Livewire\Attributes\{Layout, Title};
 use Livewire\Component;
 
+#[Layout('components.layouts.store')]
+#[Title('Checkout Page')]
 class Checkout extends Component
 {
     public $name, $email, $address;
@@ -17,6 +20,6 @@ class Checkout extends Component
 
     public function render()
     {
-        return view('livewire.store.checkout')->layout('components.layouts.store', ['title' => 'Checkout']);
+        return view('livewire.store.checkout');
     }
 }

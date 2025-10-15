@@ -51,7 +51,7 @@ class FetchProducts extends Component
               
                 // Map API data to your Product model fields
                 foreach($data as $item) {
-                    $category = Category::where('slug', $item['category'])->first();
+                    $category = Category::where('slug', strtolower($item['category'])->$item['category'])->first();
                    
                     $slug = $this->createSlug($item['title']);
                    

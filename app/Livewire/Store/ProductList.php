@@ -31,7 +31,7 @@ class ProductList extends Component
         $products = $this->products =  Product::with('images')
                 ->where('name', 'like', '%' . $this->search . '%')
                 ->orWhere('description', 'like', '%' . $this->search . '%')
-                ->paginate(12);
+                ->paginate(9);
         return view('livewire.store.product-list', compact('products'));
     }
 }

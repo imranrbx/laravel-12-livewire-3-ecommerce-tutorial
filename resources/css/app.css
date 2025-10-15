@@ -60,7 +60,21 @@ textarea:focus[data-flux-control],
 select:focus[data-flux-control] {
     @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
 }
+.wishlist-btn {
+    @apply absolute top-2 right-2 bg-black border-4 border-black rounded-full w-8 h-8 flex items-center justify-center border-none cursor-pointer shadow-sm transition-transform duration-200;
+}
 
+.wishlist-btn:hover {
+    @apply transform scale-110;
+}
+.fa-heart {
+    font-size: 1.25rem;
+    transition: all 0.2s ease;
+}
+
+.fa-heart:hover {
+    transform: scale(1.1);
+}
 /* \[:where(&)\]:size-4 {
     @apply size-4;
 } */
