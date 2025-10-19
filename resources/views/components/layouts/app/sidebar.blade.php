@@ -18,6 +18,8 @@
                      <flux:navlist.item icon="circle-stack" :href="route('admin.products')" :current="request()->routeIs('admin.products')" wire:current wire:navigate>{{ __('Products') }}</flux:navlist.item>
 
                       <flux:navlist.item icon="tag" :href="route('admin.categories')" :current="request()->routeIs('admin.ctegories')" wire:current wire:navigate>{{ __('Categories') }}</flux:navlist.item>
+                      
+                       <flux:navlist.item icon="tag" :href="route('admin.coupons')" :current="request()->routeIs('admin.coupons')" wire:current wire:navigate>{{ __('Coupons') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 

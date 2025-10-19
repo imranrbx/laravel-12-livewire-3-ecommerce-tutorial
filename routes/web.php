@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Admin\CategoryManager;
+use App\Livewire\Admin\CouponManager;
 use App\Livewire\Admin\ProductManager;
 use App\Livewire\Customers\Addresses;
 use App\Livewire\Customers\Dashboard;
@@ -35,15 +36,16 @@ Route::middleware(['web'])->group(function () {
     Route::get('/checkout', CheckOut::class)->name('store.checkout');
     Route::get('/order-confirmation', OrderConfirmation::class)->name('store.order.confirmation');
 });
-Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::view('dashboard', 'dashboard')->name('dashboard');
-    Route::get('categories', CategoryManager::class)->name('categories');
-    Route::get('products', ProductManager::class)->name('products');
-});
 
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::redirect('settings', 'settings/profile');
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::view('dashboard', 'dashboard')->name('dashboard');
+        Route::get('categories', CategoryManager::class)->name('categories');
+        Route::get('products', ProductManager::class)->name('products');
+        Route::get('coupons', CouponManager::class)->name('coupons');
 
+    });
+    Route::redirect('settings', 'settings/profile');
     Route::get('settings/profile', Profile::class)->name('settings.profile');
     Route::get('settings/password', Password::class)->name('settings.password');
     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
